@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c07daa3d-1ecd-4d88-b559-0956a5da1e6c" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="testing_pipelineFlow" doc:id="aa706378-ca00-474f-9e0d-fea777f8d2c2" >
+		<http:listener doc:name="Listener" doc:id="27a1e095-b3d8-4bc0-9774-44b4e7e0bb4e" config-ref="HTTP_Listener_config" path="/test"/>
+		<logger level="INFO" doc:name="Working" doc:id="e383f515-a347-4779-a565-da3bf6e7c7a8" message="Working"/>
+		<set-payload value='#["App is working"]' doc:name="Set Payload" doc:id="3f94d000-63d1-45ba-8270-c031defa2f4a" />
+	</flow>
+</mule>
